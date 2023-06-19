@@ -1,8 +1,7 @@
 <template>
-
   <div class="px-4">
     <div class="border-b pb-4 mt-5 max-w-6xl m-auto font-semibold">
-        <h2 class="text-2xl">My Cart</h2>
+      <h2 class="text-2xl">My Cart</h2>
     </div>
   </div>
   <section
@@ -33,6 +32,7 @@
         </div>
         <!-- hr style -->
         <div class="w-[80%] m-auto border-b mb-8 mt-4"></div>
+        {{ item.options[0].sku }}
         <div class="flex justify-between">
           <div class="flex justify-center items-center">
             <!-- add product -->
@@ -61,14 +61,21 @@
   </section>
   <div class="flex justify-end max-w-6xl px-[22px]">
     <div class="md:w-[300px] w-full bg-white p-4 mb-8 shadow-md">
-        <div class="flex justify-between mb-6">
-            <span class="text-lg">Total :</span>
-            <span v-if="totalPrice" class="font-semibold">{{ totalPrice }} EGP</span>
-            <span v-else class="font-semibold">00</span>
-        </div>
-        <div>
-            <nuxt-link class="w-full py-2 text-center inline-block bg-slate-500 text-white rounded-sm" to="/">check out</nuxt-link>
-        </div>
+      <div class="flex justify-between mb-6">
+        <span class="text-lg">Total :</span>
+        <span v-if="totalPrice" class="font-semibold"
+          >{{ totalPrice }} EGP</span
+        >
+        <span v-else class="font-semibold">00</span>
+      </div>
+      <div>
+        <nuxt-link
+          @click="addToCart"
+          class="w-full py-2 text-center inline-block bg-slate-500 text-white rounded-sm"
+          to="/checkout"
+          >check out</nuxt-link
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -88,6 +95,10 @@ export default {
       const productStore = useProductStore();
       productStore.removeProduct(productId);
     },
+    addToCart() {
+      const productStore = useProductStore();
+      productStore.addToCart();
+    },
   },
   computed: {
     selectedProducts() {
@@ -95,9 +106,13 @@ export default {
       return productStore.selectedProducts;
     },
     totalPrice() {
-      const productStore = useProductStore()
-      return productStore.totalPrice
-    }
+      const productStore = useProductStore();
+      return productStore.totalPrice;
+    },
+    cartResponse() {
+      const productStore = useProductStore();
+      return productStore.cartResponse;
+    },
   },
 };
 </script>
