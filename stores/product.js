@@ -67,7 +67,9 @@ export const useProductStore = defineStore({
             `Failed to add item to cart: SKU ${product.options[0].sku}, Quantity ${product.quantity}, Status ${response.status}`
           );
         } else {
+          // console.log('my response', response);
           const cartResponse = await response.json();
+          
           cartResponses.push(cartResponse);
         }
       }

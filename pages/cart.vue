@@ -32,7 +32,6 @@
         </div>
         <!-- hr style -->
         <div class="w-[80%] m-auto border-b mb-8 mt-4"></div>
-        {{ item.options[0].sku }}
         <div class="flex justify-between">
           <div class="flex justify-center items-center">
             <!-- add product -->
@@ -72,7 +71,7 @@
         <nuxt-link
           @click="addToCart"
           class="w-full py-2 text-center inline-block bg-slate-500 text-white rounded-sm"
-          to="/checkout"
+          to="/cart"
           >check out</nuxt-link
         >
       </div>
